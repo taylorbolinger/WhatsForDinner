@@ -16,3 +16,29 @@ python3 manage.py runserver
 
 # Start the development server
 python3 manage.py runserver
+
+
+
+make migrations
+python manage.py makemigrations whatisfordinner
+
+apply migrations
+python manage.py migrate  
+
+
+    <!--  <link rel="stylesheet" href="{% static 'css/styles.css' %}" /> -->
+
+
+
+
+python3 manage.py createsuperuser
+admin
+
+my hotmail email. 
+
+mgibson
+same pw
+made it superuser level. 
+perms. 
+
+
