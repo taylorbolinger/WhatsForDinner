@@ -1,0 +1,62 @@
+Application Description: Family Dinner Planner - named "What's for dinner?"
+
+Overview: The Family Dinner Planner is a web application designed to help families collaboratively plan their dinners. The application allows family members to suggest dinner options, vote on their preferences, and finalize the dinner plans for each day. It aims to streamline the decision-making process and ensure that everyone's preferences are considered.
+
+Key Features:
+
+User Registration and Authentication:
+
+Family members can register and log in to the application.
+Each member has a unique profile with their contact information.
+
+Family Management:
+Families can be created and managed within the application.
+Each family has an admin member who can manage family settings and deadlines.
+
+Dinner Suggestions:
+Family members can suggest dinner options for specific dates.
+Suggestions include details such as the name of the dish, ingredients, cuisine type, and whether it is a home-cooked meal, restaurant option, or delivery option.
+
+Voting and Finalization:
+Members can view all suggestions for a given date and vote on their preferred options.
+The family admin can finalize the dinner choice based on the votes and preferences.
+
+Notifications and Reminders:
+Members receive notifications and reminders about upcoming deadlines for suggestions and finalizations.
+The application sends reminders to ensure that dinner plans are made in a timely manner.
+
+Models in Use:
+
+Member:
+Represents a family member with attributes such as name, email, and phone number.
+Each member can belong to a family and make dinner suggestions.
+
+Family:
+Represents a family unit with attributes such as family name, creation date, and admin member.
+Manages deadlines for dinner suggestions and finalizations.
+
+DinnerSuggestions:
+Represents a dinner suggestion made by a family member.
+Includes details such as the member who made the suggestion, the family it belongs to, the dinner option suggested, the date, and whether it is the final choice.
+
+DinnerOptions:
+Represents the different dinner options available for suggestion.
+Includes details such as the name of the dish, ingredients, cuisine type, and entry type (home-cooked, restaurant, or delivery).
+
+Example Use Case:
+
+Creating a Family:
+John creates a family named "Smith Family" and invites his wife Jane and their two children to join.
+
+Making Dinner Suggestions:
+Jane suggests "Spaghetti Carbonara" for dinner on Friday, selecting "Italian" as the cuisine type and "Home Entree" as the entry type.
+John suggests "Tacos" for the same date, selecting "Mexican" as the cuisine type and "Restaurant" as the entry type.
+
+Voting and Finalization:
+
+The children vote for their preferred dinner option.
+Based on the votes, John (the admin) finalizes "Spaghetti Carbonara" as the dinner choice for Friday.
+
+Notifications:
+The application sends a notification to all family members about the finalized dinner plan.
+This application helps families efficiently plan their meals, ensuring that everyone's preferences are considered and reducing the stress of daily dinner planning.

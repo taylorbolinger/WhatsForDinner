@@ -16,8 +16,8 @@ class Member(models.Model):
 class Family(models.Model):
     family_id = models.AutoField(primary_key=True)
     family_name = models.CharField(max_length=50)
-    creation_date = models.DateField(default=datetime.date.today)
     admin_member_id = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)
+    creation_date = models.DateField(default=datetime.date.today)
     suggestion_deadline = models.TimeField(default='14:00')
     dinner_deadline = models.TimeField(default='17:00')
     
@@ -26,24 +26,33 @@ class Family(models.Model):
 
 class DinnerSuggestions(models.Model):
     dinner_suggestion_id = models.AutoField(primary_key=True)
-    member = models.ForeignKey(Member, on_delete=models.CASCADE)
-    family_id = models.ForeignKey(Family, on_delete=models.CASCADE)
-    dinner_options_id = models.ForeignKey('DinnerOptions', on_delete=models.CASCADE)
+    member_id = models.ForeignKey(Member, on_delete=models.CASCADE, null=True, blank=True)
+    family_id = models.ForeignKey(Family, on_delete=models.CASCADE, null=True, blank=True)
+    dinner_options_id = models.ForeignKey('DinnerOptions', on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateField(default=datetime.date.today)
     is_final_choice = models.BooleanField(default=False)
 
     def __str__(self):
-        if self.is_final_choice:
-            return f"Final Choice on {self.date}"
-        return self.restaurant_or_meal_name
+        return self.member_id.name + ' suggested ' + self.dinner_options_id.name + ' for ' + self.date.strftime('%m/%d/%Y')
 
 class DinnerOptions(models.Model):
     dinner_options_id = models.AutoField(primary_key=True)
+    family_id = models.ForeignKey(Family, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=50)
     ingredients = models.CharField(max_length=50, null=True, blank=True)
-    cuisine_type = models.CharField(max_length=50, null=True, blank=True)
-    payment_options = models.CharField(max_length=50, null=True, blank=True)
-    delivery_time = models.TimeField(null=True, blank=True)
+    cuisine_type_choices = [
+        ('italian', 'Italian'),
+        ('mexican', 'Mexican'),
+        ('chinese', 'Chinese'),
+        ('indian', 'Indian'),
+        ('japanese', 'Japanese'),
+        ('american', 'American'),
+        ('french', 'French'),
+        ('mediterranean', 'Mediterranean'),
+        ('thai', 'Thai'),
+        ('greek', 'Greek'),
+    ]
+    cuisine_type = models.CharField(max_length=50, null=True, blank=True, choices=cuisine_type_choices)
     ENTRY_TYPE_CHOICES = [
         ('home_entree', 'Home Entree'),
         ('restaurant', 'Restaurant'),
@@ -52,6 +61,6 @@ class DinnerOptions(models.Model):
     entry_type = models.CharField(max_length=20, choices=ENTRY_TYPE_CHOICES)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.family_id.family_name}) - {self.entry_type} ({self.cuisine_type})"
 
     

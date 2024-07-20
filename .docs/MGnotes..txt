@@ -1,4 +1,4 @@
-
+77
 
 the first time a codespace is created run all of these. 
 
@@ -16,8 +16,6 @@ python3 manage.py runserver
 
 # Start the development server
 python3 manage.py runserver
-
-
 
 make migrations
 python manage.py makemigrations whatisfordinner
@@ -46,4 +44,11 @@ July 20, notes
 next? 
 
 
-pip install pylint
+pip install pylint ## never got working.  
+
+Apply model updates to the application: 
+# Generate Migration Files
+python3 manage.py makemigrations
+# do the Migration
+python3 manage.py migrate
+
