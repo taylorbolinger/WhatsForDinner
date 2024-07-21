@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-status">
+  {% if user.is_authenticated %}
+  Hello, {{ user.username }}!<br>
+  <a href="{% url 'logout' %}">Logout</a>
+  {% else %}
+  Hello, Guest!<br>
+  <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+</div>
+<h2> Dinner Options for {{ user.username }}</h2>
+
+{% for option in dinner_options %}
+<p>{{ option.name }} - {{ option.entry_type }} - {{ option.cuisine_type }}</p>
+{% endfor %}
+
+<h3>Add/Edit Dinner Option</h3>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}

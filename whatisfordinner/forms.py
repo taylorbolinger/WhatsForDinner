@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Family, Member
+from .models import Family, Member, DinnerOptions
 
 class SignUpForm(UserCreationForm):
     name = forms.CharField(max_length=50, required=True)
@@ -13,4 +13,8 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'name', 'phone_number', 'family_id')
         
-        
+
+class DinnerOptionsForm(forms.ModelForm):
+    class Meta:
+        model = DinnerOptions
+        fields = ['name', 'ingredients', 'cuisine_type', 'entry_type']
