@@ -46,3 +46,18 @@ python3 manage.py makemigrations
 # do the Migration
 python3 manage.py migrate
 
+Broken stuff: 
+1.
+this is a spelling or something problem: 
+    ENTRY_TYPE_CHOICES = [
+        ('home_entree', 'Home Entree'),
+        ('restaurant', 'Restaurant'),
+        ('delivery_option', 'Delivery Option'),
+    ]
+    entry_type = models.CharField(max_length=20, choices=ENTRY_TYPE_CHOICES)
+2. 
+If a person isn't in a family, they can add dinner options, which doesn't make sense b/c the options should be designated for a family
+3. 
+plural/singular is wrong on some data models/views/pages or not consistent.  
+
+

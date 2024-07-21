@@ -1,16 +1,37 @@
 {% load static %}
+<!-- stuff on this page is going to be - reused on all the pages -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Welcome{% endblock %}</title>
+  <!---  So this title is used UNLESS the child page has its block with same name  -->
+  <title>{% block title %}What is for dinner?{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-  {% block content %}{% endblock %}
+  <div class="auth-status">
+    {% if user.is_authenticated %}
+    Hello, {{ user.username }}!<br>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    Hello, Guest!<br>
+    <a href="{% url 'login' %}">Login</a><br>
+    <a href="{% url 'signup' %}">SignUp</a>
+    {% endif %}
+  </div>
+  {% block content %}
+  <!-- this where the core content will overwrite from the child pages. -->
+  {% endblock %}
 </body>
+
+<footer>
+  <!-- this is where footer stuff should go. -->
+  <p>&copy; 2024 What is for dinner?</p>
+  <!-- we could add links to email support, or about us page -->
+  <!-- could add social media links -->
+</footer>
 
 </html>

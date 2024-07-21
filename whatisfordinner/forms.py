@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Family, Member, DinnerOptions
+from .models import Family, Member, DinnerOptions, DinnerSuggestions
 
 class SignUpForm(UserCreationForm):
     name = forms.CharField(max_length=50, required=True)
@@ -18,3 +18,17 @@ class DinnerOptionsForm(forms.ModelForm):
     class Meta:
         model = DinnerOptions
         fields = ['name', 'ingredients', 'cuisine_type', 'entry_type']
+        
+
+class DinnerSuggestionForm(forms.ModelForm):
+    def __init__(self, family_id, *args, **kwargs):
+        super(DinnerSuggestionForm, self).__init__(*args, **kwargs)
+        self.fields['dinner_options_id'].queryset = DinnerOptions.objects.filter(family_id=family_id) # this pulls back the options for the family_id
+        
+    class Meta:
+        model = DinnerSuggestions
+        fields = ['dinner_options_id']
+        labels = {
+            'dinner_options_id': 'Dinner Option'
+        }
+

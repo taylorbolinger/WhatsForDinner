@@ -1,46 +1,43 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- this is the block that will overwrite the title in the base.html -->
+<!-- I removed it. leave or stay? -->
+<!-- note:  HTML comment are actually ready by Django, so to comment Django the syntax of this next line must be used ----->
+{# {% block title %}Welcome to What is for dinner?{% endblock %} #}
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome</title>
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-</head>
 
-<body>
-  <div class="auth-status">
+{% block content %}
+<div class="container">
+  <div class="header">
+    <h1>Welcome to What is for Dinner?</h1>
+  </div>
+  <div class="links-for-users">
+    <!-- this could be expanded and re-used or moved to a nav bare or a parent template. -->
     {% if user.is_authenticated %}
-    Hello, {{ user.username }}!<br>
-    <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    Hello, Guest!<br>
-    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'dinner_options_view' %}">Add and View Dinner Options</a><br>
+    <a href="{% url 'dinner_suggestion_view' %}">Make or view your Dinner Suggestion for tonight</a>
+
+    <br><br>
     {% endif %}
   </div>
-
-  <div class="container">
-    <div class="header">
-      <!--         <img src="{% static 'images/logo.png' %}" alt="Logo" /> -->
-      <h1>Welcome to What is for dinner?</h1>
-    </div>
+  <!-- I think this would be home page only.  -->
+  <div class="description">
+    <p>What is for dinner? is a site where you can add your dinner options and then have the Family Admin select one for
+      you. This is great getting everyone's input and deciding "What is for dinner?!" </p>
     <div class="images">
       <div>
-        <img src="{% static 'images/dinnerTablewithFood.png' %}" alt="Image 1" />
+        <img src="{% static 'images/dinnerTablewithFood.png' %}" alt="Dinner table with food" />
         <div class="caption">Sam wants this.</div>
       </div>
       <div>
-        <img src="{% static 'images/dinnerTablewithFood2.png' %}" alt="Image 2" />
+        <img src="{% static 'images/dinnerTablewithFood2.png' %}" alt="Second dinner table with food" />
         <div class="caption">Mark wants this!</div>
       </div>
       <div>
-        <img src="{% static 'images/dinnerTablewithFood3.png' %}" alt="Image 3" />
-        <div class="caption">Sarah says this!</div>
+        <img src="{% static 'images/dinnerTablewithFood3.png' %}" alt="Third dinner table with food" />
+        <div class="caption">Sarah wants this!</div>
       </div>
     </div>
   </div>
-</body>
-
-</html>
+  {% endblock %}

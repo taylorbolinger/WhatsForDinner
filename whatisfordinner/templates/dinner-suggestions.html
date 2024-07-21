@@ -1,0 +1,18 @@
+{# this is a base set of stuff to put in a template file#}
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<h2>Log Your Dinner Suggestion</h2>
+<p>What is your dinner suggestion?</p>
+
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>
+
+
+{% endblock %}

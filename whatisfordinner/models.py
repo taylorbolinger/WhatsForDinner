@@ -13,6 +13,7 @@ class Member(models.Model):
     email = models.EmailField(unique=True, validators=[EmailValidator()])
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     family_id = models.ForeignKey('Family', on_delete=models.CASCADE, null=True, blank=True)
+    
     def __str__(self):
         return self.name
 
@@ -23,7 +24,7 @@ class Family(models.Model):
     creation_date = models.DateField(default=datetime.date.today)
     suggestion_deadline = models.TimeField(default='14:00')
     dinner_deadline = models.TimeField(default='17:00')
-    
+  
     def __str__(self):
         return self.family_name
 

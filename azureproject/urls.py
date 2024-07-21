@@ -15,8 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('whatisfordinner.urls')),  # Include all URLs from whatisfordinner
+    path('', include('whatisfordinner.urls')),  # Include all URLs from whatisfordinner    
 ]
+
+# this is added on just support the debug toolbar, it should add to the list above.  
+# note the urlpatterns + urlpatterns below.  :) 
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
