@@ -12,6 +12,12 @@
 </head>
 
 <body>
+  <div class="logo">
+    <img src=" {% static 'images/WFDlogo.png' %}" alt="Logo">
+  </div>
+
+
+
   <div class="auth-status">
     {% if user.is_authenticated %}
     Hello, {{ user.username }}!<br>
@@ -31,7 +37,7 @@
   <!-- this is where footer stuff should go. -->
   <p>&copy; 2024 What is for dinner?</p>
   <!-- we could add links to email support, or about us page -->
-  <!-- could add social media links -->
+  <!-- could add social  media links -->
 </footer>
 
 </html>

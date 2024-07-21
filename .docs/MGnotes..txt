@@ -60,4 +60,6 @@ If a person isn't in a family, they can add dinner options, which doesn't make s
 3. 
 plural/singular is wrong on some data models/views/pages or not consistent.  
 
+if you want to start over with models, then delete files in migrations folder, except init py 
+
 

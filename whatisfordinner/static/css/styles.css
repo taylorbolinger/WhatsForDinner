@@ -1,3 +1,4 @@
+/* This is a CSS comment */
 body {
   font-family: Arial, sans-serif;
   text-align: center;
@@ -5,6 +6,14 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.logo {
+    position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+
 
 .auth-status {
   text-align: right;
@@ -80,3 +89,29 @@ body {
   background-color: #ddd;
   color: black;
 }
+
+/* from Taylor's css */
+.main-bg-color{
+    background-color: #fb9c9c !important;
+    color: black !important;
+}
+
+.text-style{
+    font-weight: bold;
+}
+
+.card-img-top{
+    width: 40%;
+    border-radius: 50%;
+    border: black solid 2px;
+    margin: 0 auto;
+}
+
+.card{
+    padding: 1.5em .5em .5em;
+    text-align: center;
+    border: none;
+
+}
+
+

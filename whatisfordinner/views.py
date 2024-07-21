@@ -13,9 +13,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, DinnerOptionsForm, DinnerSuggestionForm
 from .models import Member, DinnerOptions, DinnerSuggestions
 
-def hello_world(request):
-    return HttpResponse("Hello World")
-  
+# Create your views here.
 def index(request):
     return render(request, 'index.html')
 
@@ -140,6 +138,6 @@ def dinner_suggestion_view(request):
     return render(request, 'dinner-suggestions.html', context)
 
 # t-shootin fun getting django toolbar going: 
-def show_client_ip(request):
+def show_client_ip_view(request):
     client_ip = request.META.get('REMOTE_ADDR', None)
     return HttpResponse(f"Your IP Address is: {client_ip}") ## shows loopback via docker
