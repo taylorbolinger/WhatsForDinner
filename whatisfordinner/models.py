@@ -1,13 +1,16 @@
 ## this is a sample and does not fit the currernt data model
 import datetime
 from django.db import models
+from django.contrib.auth.models import User # does the user stuff allow us to connect member to user. 
+from django.core.validators import EmailValidator
 
 # Create your models here.
 
 class Member(models.Model):
     member_id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=50)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, validators=[EmailValidator()])
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     family_id = models.ForeignKey('Family', on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
@@ -63,4 +66,5 @@ class DinnerOptions(models.Model):
     def __str__(self):
         return f"{self.name} ({self.family_id.family_name}) - {self.entry_type} ({self.cuisine_type})"
 
+    
     

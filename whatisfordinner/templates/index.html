@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+</head>
+
+<body>
+  <div class="auth-status">
+    {% if user.is_authenticated %}
+    Hello, {{ user.username }}!<br>
+    <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+    Hello, Guest!<br>
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <!--         <img src="{% static 'images/logo.png' %}" alt="Logo" /> -->
+      <h1>Welcome to What is for dinner?</h1>
+    </div>
+    <div class="images">
+      <div>
+        <img src="{% static 'images/dinnerTablewithFood.png' %}" alt="Image 1" />
+        <div class="caption">Sam wants this.</div>
+      </div>
+      <div>
+        <img src="{% static 'images/dinnerTablewithFood2.png' %}" alt="Image 2" />
+        <div class="caption">Mark wants this!</div>
+      </div>
+      <div>
+        <img src="{% static 'images/dinnerTablewithFood3.png' %}" alt="Image 3" />
+        <div class="caption">Sarah says this!</div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

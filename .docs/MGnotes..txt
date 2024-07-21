@@ -31,20 +31,14 @@ python manage.py migrate
 
 python3 manage.py createsuperuser
 admin
-
 my hotmail email. 
 
-mgibson
-same pw
-made it superuser level. 
-perms. 
-
-July 20, notes
-
-next? 
+now http://localhost:8000/admin/
+is working, and i can login with it.  
 
 
 pip install pylint ## never got working.  
+# dont understand what is weird about linting for python in my config
 
 Apply model updates to the application: 
 # Generate Migration Files

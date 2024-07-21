@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="auth-status">
+  Hello, {{ user.username }}!<br>
+  You are already logged in. Would you like to
+  <a href="{% url 'logout' %}">logout</a> or go to the <a href="{% url 'index' %}">homepage</a>?
+</div>
+{% else %}
+<div class="login-container">
+  <a href="{% url 'index' %}">homepage</a>
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+</div>
+{% endif %}
+{% endblock %}
