@@ -4,6 +4,10 @@
 <html lang="en">
 
 <head>
+  <div>
+    <img src=" {% static 'images/WFDlogo.png' %}" alt="Logo" class="logo">
+  </div>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!---  So this title is used UNLESS the child page has its block with same name  -->
@@ -12,11 +16,6 @@
 </head>
 
 <body>
-  <div class="logo">
-    <img src=" {% static 'images/WFDlogo.png' %}" alt="Logo">
-  </div>
-
-
 
   <div class="auth-status">
     {% if user.is_authenticated %}
@@ -26,6 +25,15 @@
     Hello, Guest!<br>
     <a href="{% url 'login' %}">Login</a><br>
     <a href="{% url 'signup' %}">SignUp</a>
+    {% endif %}
+  </div>
+  <div class="links-for-users">
+    <!-- this could be expanded and re-used or moved to a nav bare or a parent template. -->
+    {% if user.is_authenticated %}
+    <a href="{% url 'dinner_options_view' %}">Add and View Dinner Options</a><br>
+    <a href="{% url 'dinner_suggestion_view' %}">Make or view your Dinner Suggestion for tonight</a>
+
+    <br><br>
     {% endif %}
   </div>
   {% block content %}
