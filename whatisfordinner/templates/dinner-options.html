@@ -5,9 +5,26 @@
 
 <h2> Dinner Options for {{ user.username }} - Family: {{ user.family.name }} </h2>
 
-{% for option in dinner_options %}
-<p>{{ option.name }} - {{ option.entry_type }} - {{ option.cuisine_type }}</p>
-{% endfor %}
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Entry Type</th>
+        <th>Cuisine Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for option in dinner_options %}
+      <tr>
+        <td>{{ option.name }}</td>
+        <td>{{ option.entry_type }}</td>
+        <td>{{ option.cuisine_type }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 <h3>Add/Edit Dinner Option</h3>
 <form method="post">

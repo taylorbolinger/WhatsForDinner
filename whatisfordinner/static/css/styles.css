@@ -6,6 +6,11 @@ body {
   margin: 0;
   padding: 0;
 }
+.table-container {
+  width: 100%; /* Full width to center the table in */
+  display: flex;
+  justify-content: center; /* This centers the table horizontally */
+}
 
 .logo {
   position: absolute;
