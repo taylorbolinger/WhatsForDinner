@@ -1,4 +1,33 @@
-body {
+.main-bg-color{
+  background-color: #fb9c9c !important;
+  color: black !important;
+  width: auto !important;
+}
+
+.text-style{
+  font-weight: bold;
+}
+
+.card-img-round{
+  width: 40%;
+  border-radius: 50%;
+  border: black solid 2px;
+  margin: 0 auto;
+}
+
+.card{
+  padding: 1.5em .5em .5em;
+  text-align: center;
+  border: none;
+
+}
+
+footer{
+  width: 100% !important;
+  background-color: #fb9c9c !important;
+}
+
+/*body {
   font-family: Arial, sans-serif;
   text-align: center;
   background-color: #f4f4f4;
@@ -80,3 +109,4 @@ body {
   background-color: #ddd;
   color: black;
 }
+*/

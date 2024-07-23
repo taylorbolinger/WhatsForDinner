@@ -9,22 +9,24 @@
   <!---  So this title is used UNLESS the child page has its block with same name  -->
   <title>{% block title %}What is for dinner?{% endblock %}</title>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary main-bg-color">
       <div class="container-fluid">
-          <a class="navbar-brand" href="#"><img src="./assets/images/WFD logo.png" alt="Bootstrap" width="50" height="50"></a>
+          <a class="navbar-brand" href=""><img src="../static/images/WFD logo.png" alt="Bootstrap" width="50" height="50"></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button> 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav">
                   <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  <a class="nav-link" href="#">My Family</a>
-                  <a class="nav-link" href="#">My Account</a>
+                  <a class="nav-link" href="./login">Login</a>
+                  <a class="nav-link" href="#">Sign Up</a>
                   <a class="nav-link" href="#">Create a Family</a>
                   <a class="nav-link" href="#">Join a Family</a>
                   <a class="nav-link" href="#">Logout</a>
@@ -44,23 +46,22 @@
     {% endif %}
   </div>
 
-  <!-- Bootstrap JS and dependencies -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
   {% block content %}
   <!-- this where the core content will overwrite from the child pages. -->
   {% endblock %}
 
-   <!--Footer should be added to each page. Copy and paste. Do not edit-->
-        <footer>
-            <div class="sticky-bottom text-bg-primary p-3 main-bg-color text-center">&copy; Copyright 2024 What's For Dinner</div>
-        </footer>
+  
+
 </body>
 
 
   <!-- this is where footer stuff should go. -->
-
+  <footer class="footer">
+    <div class="container-fluid">
+    <div class=" footer-bottom p-4 main-bg-color text-center">© Copyright 2024 What's For Dinner</div>
+    </div>
+  </footer>
   <!-- we could add links to email support, or about us page -->
   <!-- could add social media links -->
 
