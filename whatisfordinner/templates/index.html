@@ -16,19 +16,21 @@
   <div class="description">
     <p>What is for dinner? is a site where you can add your dinner options and then have the Family Admin select one for
       you. This is great getting everyone's input and deciding "What is for dinner?!" </p>
-    <div class="images">
-      <div>
-        <img src="{% static 'images/dinnerTablewithFood.png' %}" alt="Dinner table with food" />
-        <div class="caption">Sam wants this.</div>
+    <div class="card-group gap-3 mb-5">
+      
+      <div class=" card col-md-3 mb-sm-0">
+        <img src="{% static 'images/dinnerTablewithFood.png' %}" class="card-img-top" alt="Dinner table with food" />
+        <div class="caption card-text">Sam wants this.</div>
       </div>
-      <div>
-        <img src="{% static 'images/dinnerTablewithFood2.png' %}" alt="Second dinner table with food" />
+      <div class="card col-md-3 mb-sm-0">
+        <img src="{% static 'images/dinnerTablewithFood2.png' %}" class="card-img-top" alt="Second dinner table with food" />
         <div class="caption">Mark wants this!</div>
       </div>
-      <div>
-        <img src="{% static 'images/dinnerTablewithFood3.png' %}" alt="Third dinner table with food" />
+      <div class="card col-md-3 mb-sm-0">
+        <img src="{% static 'images/dinnerTablewithFood3.png' %}" class="card-img-top" alt="Third dinner table with food" />
         <div class="caption">Sarah wants this!</div>
       </div>
     </div>
+  </div>
   </div>
   {% endblock %}
