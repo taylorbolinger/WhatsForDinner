@@ -16,6 +16,15 @@ class Member(models.Model):
     
     def __str__(self):
         return self.name
+ 
+    def is_family_admin(self):
+        if self.family_id and self.family_id.admin_member_id == self:
+            return True
+        return False   
+    
+    def get_family(self):
+        return self.family_id
+ 
 
 class Family(models.Model):
     family_id = models.AutoField(primary_key=True)
@@ -38,6 +47,24 @@ class DinnerSuggestions(models.Model):
 
     def __str__(self):
         return self.member_id.name + ' suggested ' + self.dinner_options_id.name + ' for ' + self.date.strftime('%m/%d/%Y')
+    
+    def get_todays_family_dinner_suggestions(self):
+        today = datetime.date.today()
+        return DinnerSuggestions.objects.filter(family_id=self.family_id, date=today)
+    
+    def isFinalChoiceDoneForToday(self):
+        today = datetime.date.today()
+        return DinnerSuggestions.objects.filter(family_id=self.family_id, date=today, is_final_choice=True).exists()
+    
+    def set_final_choice(self):
+        today = datetime.date.today()
+        suggestions = DinnerSuggestions.objects.filter(family_id=self.family_id, date=today)
+        if suggestions.exists():
+            suggestions.update(is_final_choice=False)
+            self.is_final_choice = True
+            self.save()
+        else:
+            raise Exception("No dinner suggestions found for today.")
 
 class DinnerOptions(models.Model):
     dinner_options_id = models.AutoField(primary_key=True)
