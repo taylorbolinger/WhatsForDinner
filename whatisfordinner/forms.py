@@ -21,9 +21,13 @@ class DinnerOptionsForm(forms.ModelForm):
         
 
 class DinnerSuggestionForm(forms.ModelForm):
-    def __init__(self, family_id, *args, **kwargs):
+    def __init__(self, family_id, member_id, date, *args, **kwargs):
         super(DinnerSuggestionForm, self).__init__(*args, **kwargs)
-        self.fields['dinner_options_id'].queryset = DinnerOptions.objects.filter(family_id=family_id) # this pulls back the options for the family_id
+        self.fields['dinner_options_id'].queryset = DinnerOptions.objects.filter(
+            family_id=family_id
+        )  # this pulls back the options for the family_id, member_id
+        # not DATE.  That is sent to Suggestions, not pulled from Options. duh.
+        # not member b/c we are not filtering by member, we are filtering by family.
         
     class Meta:
         model = DinnerSuggestions
@@ -31,4 +35,3 @@ class DinnerSuggestionForm(forms.ModelForm):
         labels = {
             'dinner_options_id': 'Dinner Option'
         }
-

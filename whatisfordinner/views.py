@@ -106,7 +106,7 @@ def dinner_options_view(request):
 def dinner_suggestion_view(request):
     try:
         user_member = Member.objects.get(user=request.user)  
-        family_id = user_member.family_id.family_id  # Assuming this is how you get the family_id
+        family = user_member.family_id  # Get the Family instance
     except (AttributeError, Member.DoesNotExist):
         # Handle cases where the user does not have a family or member profile
         return HttpResponse("You must be a member of a family to view this page.")
@@ -116,23 +116,28 @@ def dinner_suggestion_view(request):
 
     # Get dinner suggestions for the user's family for today
     today = timezone.now().date()
-    dinner_suggestions = DinnerSuggestions.objects.filter(family_id=family_id, date=today)
+    dinner_suggestions = DinnerSuggestions.objects.filter(family_id=family, date=today)
 
     # Check if there are any dinner suggestions for today
     if dinner_suggestions.exists():
         # Display the dinner suggestions for today
+        ## not giving the option to make another suggestion
         context['dinner_suggestions'] = dinner_suggestions
+        return render(request, 'dinner-suggestions.html', context)
 
     # Handle form submission
+    # specific to family, member, and date!
     if request.method == 'POST':
-        form = DinnerSuggestionForm(request.POST, family_id=family_id)
+        form = DinnerSuggestionForm(data=request.POST, family_id=family.family_id, member_id=user_member.member_id, date=today)
         if form.is_valid():
             dinner_suggestion = form.save(commit=False)
-            dinner_suggestion.family_id = family_id
+            dinner_suggestion.family_id = family  # Assign the Family instance
+            dinner_suggestion.member_id = user_member  # Assign the Member instance
+            dinner_suggestion.date = timezone.now().date() # default in model?  
             dinner_suggestion.save()
             return redirect('dinner_suggestion_view')
     else:
-        form = DinnerSuggestionForm(family_id=family_id)
+        form = DinnerSuggestionForm(family_id=family.family_id, member_id=user_member.member_id, date=today)
 
     context['form'] = form
     return render(request, 'dinner-suggestions.html', context)
