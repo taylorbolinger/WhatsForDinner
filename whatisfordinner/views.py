@@ -141,3 +141,4 @@ def dinner_suggestion_view(request):
 def show_client_ip_view(request):
     client_ip = request.META.get('REMOTE_ADDR', None)
     return HttpResponse(f"Your IP Address is: {client_ip}") ## shows loopback via docker
+
