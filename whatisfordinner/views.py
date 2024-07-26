@@ -116,13 +116,16 @@ def dinner_suggestion_view(request):
 
     # Get dinner suggestions for the user's family for today
     today = timezone.now().date()
-    dinner_suggestions = DinnerSuggestions.objects.filter(family_id=family, date=today)
+    users_dinner_suggestions = DinnerSuggestions.objects.filter(member_id=user_member.member_id, date=today) # this needs to be filtered by the mmeber, not the family.  duh.
 
-    # Check if there are any dinner suggestions for today
-    if dinner_suggestions.exists():
+    # Check if there are any dinner suggestions for today by this user.
+    if users_dinner_suggestions.exists():
         # Display the dinner suggestions for today
         ## not giving the option to make another suggestion
-        context['dinner_suggestions'] = dinner_suggestions
+        context['users_dinner_suggestions'] = users_dinner_suggestions
+        first = users_dinner_suggestions.first() # there will always only be 1 suggestion per user per day.
+        context['users_dinner_suggestions_message'] = f"{first.member_id.name} suggested {first.dinner_options_id.name} for {first.date.strftime('%m/%d/%Y')}"
+        context['message'] = "You have already made a dinner suggestion for today."
         return render(request, 'dinner-suggestions.html', context)
 
     # Handle form submission
