@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm
 from .models import Family, Member, DinnerOptions, DinnerSuggestions
 
 class SignUpForm(UserCreationForm):
@@ -12,16 +12,18 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'name', 'phone_number', 'family_id')
+        
 
 class DinnerOptionsForm(forms.ModelForm):
     class Meta:
         model = DinnerOptions
         fields = ['name', 'ingredients', 'cuisine_type', 'entry_type']
+        
 
 class DinnerSuggestionForm(forms.ModelForm):
     def __init__(self, family_id, *args, **kwargs):
         super(DinnerSuggestionForm, self).__init__(*args, **kwargs)
-        self.fields['dinner_options_id'].queryset = DinnerOptions.objects.filter(family_id=family_id)  # Filters based on family_id
+        self.fields['dinner_options_id'].queryset = DinnerOptions.objects.filter(family_id=family_id) # this pulls back the options for the family_id
         
     class Meta:
         model = DinnerSuggestions
@@ -30,12 +32,3 @@ class DinnerSuggestionForm(forms.ModelForm):
             'dinner_options_id': 'Dinner Option'
         }
 
-class MemberForm(forms.ModelForm):
-    class Meta:
-        model = Member
-        fields = ['name', 'email', 'phone_number']  # Correctly aligned with Member model
-
-class CustomPasswordChangeForm(PasswordChangeForm):
-    old_password = forms.CharField(label='Old password', widget=forms.PasswordInput)
-    new_password1 = forms.CharField(label='New password', widget=forms.PasswordInput, help_text='Enter new password.')
-    new_password2 = forms.CharField(label='Confirm new password', widget=forms.PasswordInput, help_text='Enter new password again.')
