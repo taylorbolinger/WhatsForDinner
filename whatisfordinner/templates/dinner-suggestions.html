@@ -5,7 +5,15 @@
 
 {% block content %}
 <h2>Log Your Dinner Suggestion</h2>
+
+{# if a suggestion has already been made it will display the suggestion and not allow another.#}
+{% if message %}
+<p>{{ message }}</p>
+<p>{{ users_dinner_suggestions_message }}</p>
+{% else %}
+{# if no suggestion has been made it prompts and gives you a form to make a suggestion. #}
 <p>What is your dinner suggestion for {{ current_date }}?</p>
+{% endif %}
 
 
 <form method="post">
