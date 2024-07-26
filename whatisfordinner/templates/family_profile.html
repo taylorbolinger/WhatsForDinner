@@ -1,0 +1,17 @@
+{# this is a base set of stuff to put in a template file#}
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Family Profile</h2>
+
+<div class="family-profile">
+    <p><strong>Family ID:</strong> {{ family.family_id }}</p>
+    <p><strong>Family Name:</strong> {{ family.family_name }}</p>
+    <p><strong>Admin Member ID:</strong> {{ family.admin_member_id.username }}</p>
+    <p><strong>Creation Date:</strong> {{ family.creation_date }}</p>
+    <p><strong>Suggestion Deadline:</strong> {{ family.suggestion_deadline }}</p>
+    <p><strong>Dinner Deadline:</strong> {{ family.dinner_deadline }}</p>
+</div>
+
+{% endblock %}

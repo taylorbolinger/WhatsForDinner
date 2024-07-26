@@ -1,3 +1,4 @@
+
 {% load static %}
 <!-- stuff on this page is going to be - reused on all the pages -->
 <!DOCTYPE html>
@@ -74,6 +75,7 @@
         {% if user.is_authenticated %}
         Hello, {{ user.username }}!<br>
         <a class="soft-pink" href="{% url 'profile' %}">Profile</a><br>
+        <a class="soft-pink" href="{% url 'family_profile' family_id=1 %}">Family Profile</a><br>
         <a class="soft-pink" href="{% url 'logout' %}">Logout</a>
         {% else %}
         Hello, Guest!<br>
@@ -147,7 +149,6 @@
       text-align: center;
   }
   </style>
-  
 
 
 

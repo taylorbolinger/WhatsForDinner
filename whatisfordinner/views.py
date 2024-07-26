@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 
 # Local application imports
 from .forms import SignUpForm, DinnerOptionsForm, DinnerSuggestionForm, MemberForm, CustomPasswordChangeForm
-from .models import Member, DinnerOptions, DinnerSuggestions
+from .models import Member, DinnerOptions, DinnerSuggestions, Family 
 
 # Create your views here.
 def index(request):
@@ -156,3 +156,8 @@ def dinner_suggestion_view(request):
 def show_client_ip_view(request):
     client_ip = request.META.get('REMOTE_ADDR', None)
     return HttpResponse(f"Your IP Address is: {client_ip}") ## shows loopback via docker
+
+@login_required
+def family_profile (request, family_id):
+    family = get_object_or_404(Family, pk=family_id)
+    return render(request, 'family_profile.html', {'family': family})
