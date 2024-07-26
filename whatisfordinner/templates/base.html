@@ -4,7 +4,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!---  So this title is used UNLESS the child page has its block with same name  -->
@@ -17,58 +16,142 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+
+  <style>
+    .soft-pink {
+      color: #f28d8d;
+    }
+
+    .auth-container {
+      background-color: #f9f9f9;
+      padding: 5px 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      max-width: 250px;
+      margin: 10px;
+      position: absolute;
+      right: 10px;
+      top: 60px;
+    }
+
+    .auth-status {
+      text-align: center;
+    }
+
+    .auth-status a {
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    .auth-status a:hover {
+      text-decoration: underline;
+    }
+
+    .welcome-section {
+      margin-top: 0;
+    }
+  </style>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary main-bg-color">
     <div class="container-fluid">
-      <a class="navbar-brand" href=""><img src="../static/images/WFD logo.png" alt="Bootstrap" width="50"
-          height="50"></a>
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <img src="{% static 'images/WFDlogo.png' %}" alt="Logo" width="50" height="50">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="./login">Login</a>
-          <a class="nav-link" href="#">Sign Up</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
           <a class="nav-link" href="#">Create a Family</a>
           <a class="nav-link" href="#">Join a Family</a>
-          <a class="nav-link" href="#">Logout</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <div class="auth-status">
-    {% if user.is_authenticated %}
-    Hello, {{ user.username }}!<br>
-    <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-    Hello, Guest!<br>
-    <a href="{% url 'login' %}">Login</a><br>
-    <a href="{% url 'signup' %}">SignUp</a>
-    {% endif %}
+  <div class="container welcome-section">
+    <div class="auth-container">
+      <div class="auth-status">
+        {% if user.is_authenticated %}
+        Hello, {{ user.username }}!<br>
+        <a class="soft-pink" href="{% url 'profile' %}">Profile</a><br>
+        <a class="soft-pink" href="{% url 'family_profile' family_id=1 %}">Family Profile</a><br>
+        <a class="soft-pink" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        Hello, Guest!<br>
+        <a class="soft-pink" href="{% url 'login' %}">Login</a><br>
+        <a class="soft-pink" href="{% url 'signup' %}">SignUp</a>
+        {% endif %}
+      </div>
+    </div>
   </div>
 
-
   {% block content %}
-  <!-- this where the core content will overwrite from the child pages. -->
+  <!-- this is where the core content will overwrite from the child pages. -->
   {% endblock %}
 
-
-
 </body>
-
 
 <!-- this is where footer stuff should go. -->
 <footer class="footer">
   <div class="container-fluid">
-    <div class=" footer-bottom p-4 main-bg-color text-center">© Copyright 2024 What's For Dinner</div>
+    <div class="footer-bottom p-4 main-bg-color text-center">© Copyright 2024 What's For Dinner</div>
   </div>
 </footer>
 <!-- we could add links to email support, or about us page -->
 <!-- could add social media links -->
 
 </html>
+
+<style>
+  .profile-form,
+  .password-form {
+    margin: 20px auto;
+    width: 300px;
+    /* Adjust as needed */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+  .form-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .form-button:hover {
+    background-color: #0056b3;
+  }
+
+  h2 {
+    text-align: center;
+  }
+</style>
