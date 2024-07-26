@@ -11,7 +11,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2', 'name', 'phone_number', 'family_id')
 
 class DinnerOptionsForm(forms.ModelForm):
     class Meta:

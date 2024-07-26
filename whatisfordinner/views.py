@@ -20,23 +20,22 @@ def index(request):
     return render(request, 'index.html')
 
 def signup_view(request):
-  if request.method == 'POST':
+    if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.refresh_from_db()
-            # Create a Member instance for the new user
-            member = Member(user=user, name=form.cleaned_data.get('name'),
-                            email=form.cleaned_data.get('email'),
-                            phone_number=form.cleaned_data.get('phone_number'))
-            member.save()
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=user.username, password=raw_password)
+            member = Member.objects.create(
+                user=user,
+                name=form.cleaned_data.get('name'),
+                email=form.cleaned_data.get('email'),
+                phone_number=form.cleaned_data.get('phone_number'),
+                family_id=form.cleaned_data.get('family_id')
+            )
             login(request, user)
-            return redirect('profile')
-        else:
-            form = SignUpForm()
-        return render(request, 'signup.html', {'form': form})
+            return redirect('index')  
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
 
 @login_required
 def logout_view(request):
