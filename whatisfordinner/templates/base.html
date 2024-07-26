@@ -61,11 +61,8 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
-          <a class="nav-link" href="{% url 'login' %}">Login</a>
-          <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
           <a class="nav-link" href="#">Create a Family</a>
           <a class="nav-link" href="#">Join a Family</a>
-          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         </div>
       </div>
     </div>
@@ -76,6 +73,7 @@
       <div class="auth-status">
         {% if user.is_authenticated %}
         Hello, {{ user.username }}!<br>
+        <a class="soft-pink" href="{% url 'profile' %}">Profile</a><br>
         <a class="soft-pink" href="{% url 'logout' %}">Logout</a>
         {% else %}
         Hello, Guest!<br>
@@ -103,7 +101,53 @@
 
 </html>
 
-
+<style>
+  .profile-form, .password-form {
+      margin: 20px auto;
+      width: 300px; /* Adjust as needed */
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+  }
+  
+  .form-group {
+      margin-bottom: 15px;
+  }
+  
+  .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+  }
+  
+  .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+  }
+  
+  .form-button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+  }
+  
+  .form-button:hover {
+      background-color: #0056b3;
+  }
+  
+  h2 {
+      text-align: center;
+  }
+  </style>
+  
 
 
 
