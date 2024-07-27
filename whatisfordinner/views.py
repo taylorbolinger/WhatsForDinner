@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.utils import timezone
 from django.contrib.auth.forms import PasswordChangeForm
-
+import datetime
 
 # Authentication related imports
 from django.contrib.auth import login, logout, authenticate
@@ -188,7 +188,13 @@ def dinner_decision_view(request):
         member = None
         is_admin = False
 
-    if request.method == 'POST':
+    today = datetime.date.today()
+    final_choice = DinnerSuggestions.objects.filter(family_id=member.family_id, date=today, is_final_choice=True).first()
+    final_dinner_option = final_choice.dinner_options_id if final_choice else None
+
+    member_final_choice_maker = final_choice.member_id if final_choice else None
+
+    if request.method == 'POST' and is_admin:
         form = DinnerSuggestionFinalizationForm(request.POST, member=member)
         if form.is_valid():
             suggestion = form.cleaned_data['suggestion']
@@ -202,6 +208,11 @@ def dinner_decision_view(request):
         'is_admin': is_admin,
         'member': member,
         'form': form,
+        'final_choice': final_choice,
+        'final_choice_maker': member_final_choice_maker,
+        'final_dinner_option': final_dinner_option,
+        'current_date': today,
+        
     }
     return render(request, 'dinner-decision.html', context)
 
