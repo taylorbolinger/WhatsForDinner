@@ -45,3 +45,12 @@ class CustomPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label='Old password', widget=forms.PasswordInput)
     new_password1 = forms.CharField(label='New password', widget=forms.PasswordInput, help_text='Enter new password.')
     new_password2 = forms.CharField(label='Confirm new password', widget=forms.PasswordInput, help_text='Enter new password again.')
+
+class FamilyForm(forms.ModelForm):
+    class Meta:
+        model = Family
+        fields = ['family_name', 'suggestion_deadline', 'dinner_deadline']
+        widgets = {
+            'suggestion_deadline': forms.TimeInput(format='%H:%M', attrs={'type': 'time'}),
+            'dinner_deadline': forms.TimeInput(format='%H:%M', attrs={'type': 'time'}),
+        }

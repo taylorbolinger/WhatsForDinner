@@ -12,7 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
 # Local application imports
-from .forms import SignUpForm, DinnerOptionsForm, DinnerSuggestionForm, MemberForm, CustomPasswordChangeForm
+from .forms import SignUpForm, DinnerOptionsForm, DinnerSuggestionForm, MemberForm, CustomPasswordChangeForm, FamilyForm
 from .models import Member, DinnerOptions, DinnerSuggestions, Family 
 
 
@@ -166,3 +166,16 @@ def show_client_ip_view(request):
     client_ip = request.META.get('REMOTE_ADDR', None)
     return HttpResponse(f"Your IP Address is: {client_ip}") ## shows loopback via docker
 
+
+def create_family(request):
+    if request.method == 'POST':
+        form = FamilyForm(request.POST)
+        if form.is_valid():
+            family = form.save(commit=False)
+            family.creation_date = timezone.now().date()
+            family.admin_member_id = request.user.member
+            family.save()
+            return redirect('index')  # Redirect to the desired page after successful form submission
+    else:
+        form = FamilyForm()
+    return render(request, 'create_family.html', {'form': form})

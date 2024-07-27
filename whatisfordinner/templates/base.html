@@ -61,7 +61,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
-          <a class="nav-link" href="#">Create a Family</a>
+          <a class="nav-link" href="{% url 'create_family' %}">Create a Family</a>
           {% if user.is_authenticated %}
           <a class="nav-link" href="/dinner-options">Add a Dinner Option</a>
           <a class="nav-link" href="/dinner-suggestions">Make a Dinner Suggestion for Tonight</a>
