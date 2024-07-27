@@ -216,3 +216,20 @@ def dinner_decision_view(request):
     }
     return render(request, 'dinner-decision.html', context)
 
+def create_family(request):
+    if request.method == 'POST':
+        form = FamilyForm(request.POST)
+        if form.is_valid():
+            family = form.save(commit=False)
+            if request.user.is_authenticated:
+                try:
+                    family.admin_member_id = request.user.member
+                except Member.DoesNotExist:
+                    raise Http404("Authenticated user has no member profile")
+            else:
+                family.admin_member_id = None  # or set to a default value if needed
+            family.save()
+            return redirect('index')  # Redirect to the family details page or any other appropriate page
+    else:
+        form = FamilyForm()
+    return render(request, 'create_family.html', {'form': form})
