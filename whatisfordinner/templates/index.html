@@ -3,34 +3,43 @@
 
 <!-- this is the block that will overwrite the title in the base.html -->
 <!-- I removed it. leave or stay? -->
-<!-- note:  HTML comment are actually ready by Django, so to comment Django the syntax of this next line must be used ----->
+<!-- note: HTML comments are actually read by Django, so to comment Django the syntax of this next line must be used ----->
 {# {% block title %}Welcome to What is for dinner?{% endblock %} #}
 
-
 {% block content %}
-<div class="container">
-  <div class="header">
-    <h1>Welcome to What is for Dinner?</h1>
+<!-- Main container -->
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; margin-top: -150px;">
+  
+  <!-- Heading with Welcome Title -->
+  <div style="margin-bottom: 20px;">
+    <h1 style="font-family: 'Poppins', sans-serif; color: #f28d8d; margin: 0;">Welcome To: What's For Dinner?</h1>
   </div>
-  <!-- I think this would be home page only.  -->
-  <div class="description">
-    <p>What is for dinner? is a site where you can add your dinner options and then have the Family Admin select one for
-      you. This is great getting everyone's input and deciding "What is for dinner?!" </p>
-    <div class="card-group gap-3 mb-5">
+
+  <!-- Container for the 3 images and text underneath -->
+  <div style="max-width: 800px; margin: 0 auto;">
+    <!-- Introduction paragraph -->
+    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #555;">
+      Discover a fun way to plan your meals by adding your favorite dinner suggestions. Let the Family Admin choose from your delicious options, and make mealtime an exciting team decision. Let’s make deciding "What’s For Dinner?!" a delightful experience for everyone!
+    </p>
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
       
-      <div class=" card col-md-3 mb-sm-0">
-        <img src="{% static 'images/dinnerTablewithFood.png' %}" class="card-img-top" alt="Dinner table with food" />
-        <div class="caption card-text">Sam wants this.</div>
+      <div style="flex: 1; max-width: 200px; text-align: center;">
+        <img src="{% static 'images/dinnerTablewithFood.png' %}" alt="Dinner table with food" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" />
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #777; margin-top: 10px;">Sam wants this.</div>
       </div>
-      <div class="card col-md-3 mb-sm-0">
-        <img src="{% static 'images/dinnerTablewithFood2.png' %}" class="card-img-top" alt="Second dinner table with food" />
-        <div class="caption">Mark wants this!</div>
+      
+      
+      <div style="flex: 1; max-width: 200px; text-align: center;">
+        <img src="{% static 'images/dinnerTablewithFood2.png' %}" alt="Second dinner table with food" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" />
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #777; margin-top: 10px;">Mark wants this!</div>
       </div>
-      <div class="card col-md-3 mb-sm-0">
-        <img src="{% static 'images/dinnerTablewithFood3.png' %}" class="card-img-top" alt="Third dinner table with food" />
-        <div class="caption">Sarah wants this!</div>
+      
+      
+      <div style="flex: 1; max-width: 200px; text-align: center;">
+        <img src="{% static 'images/dinnerTablewithFood3.png' %}" alt="Third dinner table with food" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);" />
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #777; margin-top: 10px;">Sarah wants this!</div>
       </div>
     </div>
   </div>
-  </div>
-  {% endblock %}
+</div>
+{% endblock %}

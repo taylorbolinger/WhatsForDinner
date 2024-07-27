@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.utils import timezone
+from django.contrib.auth.forms import PasswordChangeForm
+
 
 # Authentication related imports
 from django.contrib.auth import login, logout, authenticate
@@ -10,14 +12,15 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
 # Local application imports
-from .forms import SignUpForm, DinnerOptionsForm, DinnerSuggestionForm
-from .models import Member, DinnerOptions, DinnerSuggestions
+from .forms import SignUpForm, DinnerOptionsForm, DinnerSuggestionForm, MemberForm, CustomPasswordChangeForm
+from .models import Member, DinnerOptions, DinnerSuggestions, Family 
+
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
 
-def signup(request):
+def signup_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -34,6 +37,7 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+        
 
 def logout_view(request):
     logout(request)
@@ -57,23 +61,35 @@ def user_login(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def user_login(request):
+@login_required
+def profile_view(request):
+    user = request.user
+    member, created = Member.objects.get_or_create(user=user)
+
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('index')  # Redirect to a success page.
-            else:
-                messages.error(request, "Invalid username or password.")
+        # Handle the password change form
+        if 'password_change' in request.POST:
+            password_form = CustomPasswordChangeForm(user, request.POST)
+            if password_form.is_valid():
+                user = password_form.save()
+                update_session_auth_hash(request, user)  # Keep the user logged in
+                return redirect('profile')
         else:
-            messages.error(request, "Invalid username or password.")
+            # Handle the member form
+            member_form = MemberForm(request.POST, instance=member)
+            if member_form.is_valid():
+                member_form.save()
+                return redirect('profile')
     else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+        # Instantiate forms
+        password_form = CustomPasswordChangeForm(user)
+        member_form = MemberForm(instance=member)
+    
+    context = {
+        'password_form': password_form,
+        'member_form': member_form
+    }
+    return render(request, 'userprofile.html', context)
 
 @login_required
 def dinner_options_view(request):

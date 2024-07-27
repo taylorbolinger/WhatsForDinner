@@ -1,18 +1,29 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-
-<h2>Sign Up</h2>
-
-
-<form method="post">
-  {% csrf_token %}
-  {% for field in form %}
-  <div>
-    {{ field.label_tag }}{{ field }}
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 0; margin: 0;">
+  <!-- Logo in center of page -->
+  
+  <!-- Container for the sign-up info -->
+  <div style="background-color: white; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); max-width: 360px; width: 100%; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 10px;">
+      <h2 style="font-family: 'Poppins', sans-serif; color: #f28d8d; font-size: 1.2em;">Sign Up</h2>
+    </div>
+    <form method="post" style="text-align: center;">
+      {% csrf_token %}
+      {% for field in form %}
+      <div style="margin-bottom: 8px; text-align: center;">
+        <div style="margin-bottom: 4px;">
+          {{ field.label_tag }}
+        </div>
+        <div style="width: 100%; max-width: 300px; margin: 0 auto;">
+          {{ field }}
+        </div>
+      </div>
+      {% endfor %}
+      <button type="submit" style="background-color: #f28d8d; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; width: 100%; max-width: 300px; font-size: 0.9em;">Submit</button>
+    </form>
   </div>
-  {% endfor %}
-  <button type="submit">Submit</button>
-</form>
-
+</div>
 {% endblock %}

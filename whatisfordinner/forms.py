@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from .models import Family, Member, DinnerOptions, DinnerSuggestions
 
 class SignUpForm(UserCreationForm):
@@ -35,3 +35,13 @@ class DinnerSuggestionForm(forms.ModelForm):
         labels = {
             'dinner_options_id': 'Dinner Option'
         }
+
+class MemberForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = ['name', 'email', 'phone_number']  # Correctly aligned with Member model
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(label='Old password', widget=forms.PasswordInput)
+    new_password1 = forms.CharField(label='New password', widget=forms.PasswordInput, help_text='Enter new password.')
+    new_password2 = forms.CharField(label='Confirm new password', widget=forms.PasswordInput, help_text='Enter new password again.')
