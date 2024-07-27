@@ -12,7 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
 # Local application imports
-from .forms import SignUpForm, DinnerOptionsForm, DinnerSuggestionForm, MemberForm, CustomPasswordChangeForm, FamilyForm
+from .forms import SignUpForm, DinnerOptionsForm, DinnerSuggestionForm, MemberForm, CustomPasswordChangeForm, FamilyForm, DinnerSuggestionFinalizationForm
 from .models import Member, DinnerOptions, DinnerSuggestions, Family 
 
 
@@ -126,9 +126,8 @@ def dinner_suggestion_view(request):
     except (AttributeError, Member.DoesNotExist):
         # Handle cases where the user does not have a family or member profile
         return HttpResponse("You must be a member of a family to view this page.")
-    
-    # Initialize context dictionary
-    context = {}
+
+    context = {} # Initialize context dictionary
 
     # Get dinner suggestions for the user's family for today
     today = timezone.now().date()
@@ -166,7 +165,6 @@ def show_client_ip_view(request):
     client_ip = request.META.get('REMOTE_ADDR', None)
     return HttpResponse(f"Your IP Address is: {client_ip}") ## shows loopback via docker
 
-
 def create_family(request):
     if request.method == 'POST':
         form = FamilyForm(request.POST)
@@ -179,3 +177,31 @@ def create_family(request):
     else:
         form = FamilyForm()
     return render(request, 'create_family.html', {'form': form})
+
+@login_required
+def dinner_decision_view(request):
+    user = request.user
+    try:
+        member = Member.objects.get(user=user)
+        is_admin = Family.objects.filter(admin_member_id=member).exists()
+    except Member.DoesNotExist:
+        member = None
+        is_admin = False
+
+    if request.method == 'POST':
+        form = DinnerSuggestionFinalizationForm(request.POST, member=member)
+        if form.is_valid():
+            suggestion = form.cleaned_data['suggestion']
+            suggestion.is_final_choice = True
+            suggestion.save()
+            return redirect('dinner_decision')
+    else:
+        form = DinnerSuggestionFinalizationForm(member=member)
+
+    context = {
+        'is_admin': is_admin,
+        'member': member,
+        'form': form,
+    }
+    return render(request, 'dinner-decision.html', context)
+

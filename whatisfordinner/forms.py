@@ -1,4 +1,6 @@
 from django import forms
+import datetime
+
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from .models import Family, Member, DinnerOptions, DinnerSuggestions
@@ -54,3 +56,19 @@ class FamilyForm(forms.ModelForm):
             'suggestion_deadline': forms.TimeInput(format='%H:%M', attrs={'type': 'time'}),
             'dinner_deadline': forms.TimeInput(format='%H:%M', attrs={'type': 'time'}),
         }
+        
+class DinnerSuggestionFinalizationForm(forms.Form):
+    suggestion = forms.ModelChoiceField(
+        queryset=DinnerSuggestions.objects.none(),
+        widget=forms.RadioSelect,
+        empty_label=None
+    )
+
+    def __init__(self, *args, **kwargs):
+        member = kwargs.pop('member', None)
+        super().__init__(*args, **kwargs)
+        if member and member.family_id:
+            today = datetime.date.today()
+            self.fields['suggestion'].queryset = DinnerSuggestions.objects.filter(
+                family_id=member.family_id, date=today
+            )

@@ -1,0 +1,26 @@
+{# this is a base set of stuff to put in a template file#}
+{% extends "base.html" %}
+{% load static %}
+
+<title>Dinner Decision</title>
+
+{% block content %}
+<h1>Welcome, {{ member.user.username }}</h1>
+{% if is_admin %}
+<p>You are an admin member of a family.</p>
+<!-- family admin-specific content here -->
+<h2>Choose Today's Dinner Suggestion</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Set Final Choice</button>
+</form>
+
+{% else %}
+<p>You are not the family admin.</p>
+<p>When the family decision for {{ current_date }} has been made it will be posted here..</p>
+<!-- non family-admins content here -->
+
+{% endif %}
+
+{% endblock %}

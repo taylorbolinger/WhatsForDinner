@@ -13,14 +13,15 @@
 {% else %}
 {# if no suggestion has been made it prompts and gives you a form to make a suggestion. #}
 <p>What is your dinner suggestion for {{ current_date }}?</p>
-{% endif %}
-
-
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Submit</button>
 </form>
+{% endif %}
+
+
+
 
 
 {% endblock %}

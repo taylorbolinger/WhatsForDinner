@@ -11,6 +11,8 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('dinner-options/', views.dinner_options_view, name='dinner_options_view'),
     path('dinner-suggestions/', views.dinner_suggestion_view, name='dinner_suggestion_view'),
-     path('create_family/', views.create_family, name='create_family'),
+    path('create_family/', views.create_family, name='create_family'),
     path('show-ip/', views.show_client_ip_view, name='show_client_ip_view'),
+    path('dinner-decision/', views.dinner_decision_view, name='dinner_decision'),
 ]
+
