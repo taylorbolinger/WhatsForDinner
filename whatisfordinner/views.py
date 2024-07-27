@@ -188,6 +188,7 @@ def dinner_decision_view(request):
         member = None
         is_admin = False
 
+    final_choice = False
     today = datetime.date.today()
     final_choice = DinnerSuggestions.objects.filter(family_id=member.family_id, date=today, is_final_choice=True).first()
     final_dinner_option = final_choice.dinner_options_id if final_choice else None
