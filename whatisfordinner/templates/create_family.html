@@ -2,15 +2,19 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h1 class="mt-4">Create Family</h1>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Create Family</button>
-            </form>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <h1 class="mt-4">Create Family</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn" style="background-color: #f28d8d; border: none; color: white;">Create Family</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
+
+

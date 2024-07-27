@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 0; margin: 0;">
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh; padding: 0; margin: 0;">
   <!-- Logo in center of page -->
   
   <!-- Container for the sign-up info -->
@@ -14,7 +14,7 @@
       {% csrf_token %}
       {% for field in form %}
       <div style="margin-bottom: 8px; text-align: center;">
-        <div style="margin-bottom: 4px;">
+        <div style="margin-bottom: 2px;">
           {{ field.label_tag }}
         </div>
         <div style="width: 100%; max-width: 300px; margin: 0 auto;">
@@ -27,3 +27,12 @@
   </div>
 </div>
 {% endblock %}
+
+
+
+
+
+
+
+
+
