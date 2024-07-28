@@ -1,35 +1,71 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h2>Dinner Options for {{ user.username }} - Family: {{ user.family.name }}</h2>
 
+<div class="container mt-4">
+  <div class="white-box shadow-sm p-4 mb-4">
+    <div class="table-container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Entry Type</th>
+            <th>Cuisine Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for option in dinner_options %}
+          <tr>
+            <td>{{ option.name }}</td>
+            <td>{{ option.entry_type }}</td>
+            <td>{{ option.cuisine_type }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-<h2> Dinner Options for {{ user.username }} - Family: {{ user.family.name }} </h2>
-
-<div class="table-container">
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Entry Type</th>
-        <th>Cuisine Type</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for option in dinner_options %}
-      <tr>
-        <td>{{ option.name }}</td>
-        <td>{{ option.entry_type }}</td>
-        <td>{{ option.cuisine_type }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="white-box shadow-sm p-4">
+    <h3>Add/Edit Dinner Option</h3>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
 </div>
 
-<h3>Add/Edit Dinner Option</h3>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Submit</button>
-</form>
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .white-box {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  h2, h3 {
+    text-align: center;
+  }
+</style>
+
 {% endblock %}
