@@ -32,7 +32,7 @@
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn custom-btn">Submit</button>
     </form>
   </div>
 </div>
@@ -53,14 +53,15 @@
     overflow-x: auto;
   }
 
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+  .btn.custom-btn {
+    background-color: #f28d8d;
+    border-color: #f28d8d;
+    color: white;
   }
 
-  .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+  .btn.custom-btn:hover {
+    background-color: #d97676;
+    border-color: #d97676;
   }
 
   h2, h3 {
@@ -69,3 +70,4 @@
 </style>
 
 {% endblock %}
+
