@@ -7,31 +7,62 @@
 <h1>Welcome, {{ member.name }}</h1>
 
 {% if final_choice %}
-
-<p>The family {{ final_choice.family_id }} has made a decision for today's dinner.</p>
-<p>The final choice for today's dinner was suggested by: {{ final_choice_maker.name }}</p>
-<p><strong><span style="font-size: larger;">The chosen dinner option: {{ final_dinner_option }}</span></strong></p>
-
+<div class="container mt-4">
+  <div class="white-box shadow-sm p-4 mb-4">
+    <p>The family {{ final_choice.family_id }} has made a decision for today's dinner.</p>
+    <p>The final choice for today's dinner was suggested by: {{ final_choice_maker.name }}</p>
+    <p><strong><span style="font-size: larger;">The chosen dinner option: {{ final_dinner_option }}</span></strong></p>
+  </div>
+</div>
 {% else %}
 {% if is_admin %}
 <p>You are an admin member of a family.</p>
 
-<h2>Choose Today's Dinner Suggestion</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit"> Final Choice</button>
-</form>
-
+<div class="container mt-4">
+  <div class="white-box shadow-sm p-4 mb-4">
+    <h2>Choose Today's Dinner Suggestion</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn custom-btn">Final Choice</button>
+    </form>
+  </div>
+</div>
 {% else %}
-
-<p>When the family decision for {{ current_date }} has been made it will be posted here..</p>
-
-
+<div class="container mt-4">
+  <div class="white-box shadow-sm p-4 mb-4">
+    <p>When the family decision for {{ current_date }} has been made it will be posted here.</p>
+  </div>
+</div>
+{% endif %}
 {% endif %}
 
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
 
-{% endif %}
+  .white-box {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 
+  .btn.custom-btn {
+    background-color: #f28d8d;
+    border-color: #f28d8d;
+    color: white;
+  }
+
+  .btn.custom-btn:hover {
+    background-color: #d97676;
+    border-color: #d97676;
+  }
+
+  h1, h2 {
+    text-align: center;
+  }
+</style>
 
 {% endblock %}

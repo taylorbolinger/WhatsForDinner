@@ -5,40 +5,74 @@
 
 <h2>Profile</h2>
 
-<!-- Member Form -->
-<form method="post" action="{% url 'profile' %}" class="profile-form">
-    {% csrf_token %}
-    <div class="form-group">
+<div class="container mt-4">
+  <div class="white-box shadow-sm p-4 mb-4">
+    <!-- Member Form -->
+    <form method="post" action="{% url 'profile' %}" class="profile-form">
+      {% csrf_token %}
+      <div class="form-group">
         {{ member_form.name.label_tag }}
         {{ member_form.name }}
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         {{ member_form.email.label_tag }}
         {{ member_form.email }}
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         {{ member_form.phone_number.label_tag }}
         {{ member_form.phone_number }}
-    </div>
-    <button type="submit" name="member_form_submit" class="form-button">Update Profile</button>
-</form>
+      </div>
+      <button type="submit" name="member_form_submit" class="btn custom-btn">Update Profile</button>
+    </form>
+  </div>
 
-<!-- Password Change Form -->
-<form method="post" action="{% url 'profile' %}" class="password-form">
-    {% csrf_token %}
-    <div class="form-group">
+  <div class="white-box shadow-sm p-4 mb-4">
+    <!-- Password Change Form -->
+    <form method="post" action="{% url 'profile' %}" class="password-form">
+      {% csrf_token %}
+      <div class="form-group">
         {{ password_form.old_password.label_tag }}
         {{ password_form.old_password }}
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         {{ password_form.new_password1.label_tag }}
         {{ password_form.new_password1 }}
-    </div>
-    <div class="form-group">
+      </div>
+      <div class="form-group">
         {{ password_form.new_password2.label_tag }}
         {{ password_form.new_password2 }}
-    </div>
-    <button type="submit" name="password_change" class="form-button">Change Password</button>
-</form>
+      </div>
+      <button type="submit" name="password_change" class="btn custom-btn">Change Password</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .white-box {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn.custom-btn {
+    background-color: #f28d8d;
+    border-color: #f28d8d;
+    color: white;
+  }
+
+  .btn.custom-btn:hover {
+    background-color: #d97676;
+    border-color: #d97676;
+  }
+
+  h2 {
+    text-align: center;
+  }
+</style>
 
 {% endblock %}
