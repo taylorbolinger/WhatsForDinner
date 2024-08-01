@@ -1,20 +1,17 @@
 --- This is a group project that I worked on with three other students in my Foundations of Databases and Web course for my Masters degree. ---
-page_type: sample
+
 languages:
 - azdeveloper
 - python
 - bicep
 - html
+- 
 products:
 - azure
 - azure-app-service
 - azure-database-postgresql
 - azure-virtual-network
-urlFragment: msdocs-django-postgresql-sample-app
-name: Deploy a Python (Django) web app with PostgreSQL in Azure
-description: This is a Python web app using the Django framework and the Azure Database for PostgreSQL relational database service. 
----
-<!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
+
 
 # Deploy a Python (Django) web app with PostgreSQL in Azure
 
