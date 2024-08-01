@@ -1,4 +1,4 @@
----
+--- This is a group project that I worked on with three other students in my Foundations of Databases and Web course for my Masters degree. ---
 page_type: sample
 languages:
 - azdeveloper
